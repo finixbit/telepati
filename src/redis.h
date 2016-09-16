@@ -33,7 +33,7 @@
 #include <cstdint> /* uint32_t */
 #include <string>
 #include <map>
-#include <hiredis.h> /* redisContext */
+#include <hiredis/hiredis.h> /* redisContext */
 
 #define CACHE_INVALID_PARAM	"null"
 

@@ -6,6 +6,7 @@ bins
 gens
 libs
 objs
+src/server
 
 # Compiled Object files
 *.slo

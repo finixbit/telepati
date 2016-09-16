@@ -32,7 +32,7 @@
 #include <cstring>
 #include <sys/time.h>
 #include <sstream>
-#include <hiredis.h>
+#include <hiredis/hiredis.h>
 #include "redis.h"
 
 using namespace std;
