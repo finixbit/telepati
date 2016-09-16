@@ -1,0 +1,18 @@
+{
+  "debug": "true",
+
+  "interface": "wlan0mon",
+
+  "receiver_filter": "wlan type data",
+
+  "core_grpc_server": "localhost:50052",
+
+  "sender_grpc_server": "localhost:50051",
+
+  "redis_host": "127.0.0.1",
+	
+	"redis_port": 6379,
+
+	"redis_db": 0
+}
+

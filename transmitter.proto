@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package transmitter;
+
+service TransmitterManager {
+  rpc SendMessage(TransmitterRequest) returns (TransmitterReply) {}
+  rpc SaveMessage(TransmitterRequest) returns (TransmitterReply) {}
+  rpc GetUserProfile(ProfileRequest) returns (TransmitterReply) {}
+  rpc SetUserProfile(ProfileRequest) returns (TransmitterReply) {}
+  rpc UserProfilePing(ProfileRequest) returns (TransmitterReply) {}
+  rpc GetPingMessages(ProfileRequest) returns (ProfileUsersReply) {}
+  rpc SendDataMessage(TransmitterRequest) returns (TransmitterReply) {}
+  rpc GetDataMessages(ProfileRequest) returns (UserDataMessagesReply) {}
+}
+
+message TransmitterRequest {
+  string magicNumber      = 1; // telepati
+  string messageId        = 2; // id of message
+  string messageType      = 3; // [ping/data]
+  string messageDataType  = 4; // [text, image] only if messageType=data
+  string messageTimestamp = 5; // time of message
+  string senderName       = 6; // profile name of sender
+  string senderKey        = 7; // public key of sender
+  string recipientName    = 8; // profile name of recipient
+  string messageData      = 9; // data(data/ping gps) encrypted is done at grpc client
+}
+
+message UserDataMessagesReply {
+  repeated TransmitterRequest messages = 1;
+}
+
+message ProfileRequest {
+  string name             = 1;
+  string publicKey        = 2;
+  string privateKey       = 3;
+  string lastTimestamp    = 4; 
+}
+
+message ProfileUsersReply {
+  repeated ProfileRequest users = 1;
+}
+
+message TransmitterReply {
+  bool response  = 1;
+  string data    = 2;
+}

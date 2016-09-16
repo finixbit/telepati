@@ -1,0 +1,45 @@
+{
+  "name": "Ahonya_app",
+  "version": "1.0.0",
+  "description": "Ahonya Express web apps.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node_modules/.bin/mocha tests/**"
+  },
+  "keywords": [
+    "base",
+    "project",
+    "node",
+    "express",
+    "structure"
+  ],
+  "author": "Ahonya.",
+  "license": "Ahonya",
+  "dependencies": {
+    "async": "^2.0.1",
+    "binary": "^0.3.0",
+    "body-parser": "^1.12.3",
+    "commonjs": "0.0.1",
+    "cookie-parser": "^1.4.3",
+    "deep-extend": "^0.4.1",
+    "ejs": "^2.5.1",
+    "express": "^4.12.3",
+    "express-validator": "^2.20.8",
+    "gearmanode": "^0.9.2",
+    "google-protobuf": "^3.0.0",
+    "grpc": "^1.0.0",
+    "jimp": "^0.2.24",
+    "lodash": "^4.15.0",
+    "minimist": "^1.2.0",
+    "morgan": "^1.7.0",
+    "protobufjs": "^5.0.1",
+    "socket.io": "^1.4.8",
+    "validator": "^5.5.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
+  }
+}
