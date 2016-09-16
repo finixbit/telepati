@@ -1,12 +1,16 @@
 
 
 # Dependencies
-apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill
+apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill redis-server
+
+
+# Install nodejs
+
 
 #Install libtins 
 $ cd third_party/libtins
 $ mkdir build && cd build
-$ cmake ../ -DLIBTINS_ENABLE_CXX11=1
+$ cmake ../ -DLIBTINS_ENABLE_CXX11=1 -DCMAKE_INSTALL_PREFIX=/usr
 $ make
 
 
