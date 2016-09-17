@@ -46,8 +46,8 @@ void RunSenderServer(AppConfig &appConfig);
 void SendNullMessage(const string &msgId, const string &dst, const string &msg);
 
 class TransmitterManagerServiceImpl final : public TransmitterManager::Service {
-  Status SendMessage(ServerContext* context, const TransmitterRequest* request,
-                  TransmitterReply* reply) override;
+	Status SendMessage(ServerContext* context, const TransmitterRequest* request,
+	                   TransmitterReply* reply) override;
 };
 
 #endif  // SENDER_H

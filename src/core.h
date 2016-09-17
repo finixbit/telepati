@@ -58,37 +58,37 @@ void SaveDataMessage(const TransmitterRequest *request);
 
 class CoreTransmitterManagerServiceImpl final : public TransmitterManager::Service {
   Status SaveMessage(ServerContext* context, const TransmitterRequest* request,
-                  TransmitterReply* reply) override;
+                     TransmitterReply* reply) override;
 
   Status SetUserProfile(ServerContext* context, const ProfileRequest* request,
-                  TransmitterReply* reply) override;
+                        TransmitterReply* reply) override;
 
   Status GetUserProfile(ServerContext* context, const ProfileRequest* request,
-                  TransmitterReply* reply) override;
+                        TransmitterReply* reply) override;
 
   Status UserProfilePing(ServerContext* context, const ProfileRequest* request,
-                  TransmitterReply* reply) override;
+                         TransmitterReply* reply) override;
 
   Status GetPingMessages(ServerContext* context, const ProfileRequest* request,
-                  ProfileUsersReply* reply) override;
+                         ProfileUsersReply* reply) override;
 
   Status SendDataMessage(ServerContext* context, const TransmitterRequest* request,
-                  TransmitterReply* reply) override;
+                         TransmitterReply* reply) override;
 
   Status GetDataMessages(ServerContext* context, const ProfileRequest* request,
-                  UserDataMessagesReply* reply) override;
+                         UserDataMessagesReply* reply) override;
 };
 
 
 class CoreTransmitterManagerClient {
- public:
+public:
   CoreTransmitterManagerClient();
   CoreTransmitterManagerClient(std::shared_ptr<Channel> channel);
 
   void SetChannel(std::shared_ptr<Channel> channel);
   std::string SendMessage(const TransmitterRequest request);
 
- private:
+private:
   std::unique_ptr<TransmitterManager::Stub> stub_;
 };
 

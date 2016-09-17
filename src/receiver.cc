@@ -37,8 +37,8 @@
 #include "config.h"
 #include "receiver.h"
 
-/*  
-wlan frame types 
+/*
+wlan frame types
 */
 #define MGMT_FRAME "management"
 #define CTRL_FRAME "control"
@@ -56,42 +56,42 @@ using transmitter::TransmitterManager;
 TransmitterRequest request;
 TransmitterManagerClient transmittermanager;
 
-TransmitterManagerClient::TransmitterManagerClient(){
+TransmitterManagerClient::TransmitterManagerClient() {
 }
 
 TransmitterManagerClient::TransmitterManagerClient(std::shared_ptr<Channel> channel)
-  : stub_(TransmitterManager::NewStub(channel)){
+	: stub_(TransmitterManager::NewStub(channel)) {
 };
 
 void TransmitterManagerClient::SetChannel(std::shared_ptr<Channel> channel) {
-  stub_ = TransmitterManager::NewStub(channel);
+	stub_ = TransmitterManager::NewStub(channel);
 }
 
 std::string TransmitterManagerClient::SaveMessage(const TransmitterRequest request) {
-    TransmitterReply reply;
-    ClientContext context;
-    Status status = stub_->SaveMessage(&context, request, &reply);
+	TransmitterReply reply;
+	ClientContext context;
+	Status status = stub_->SaveMessage(&context, request, &reply);
 
-    if (status.ok()) {
-      return reply.data();
-    } else {
-      std::cout << status.error_code() << ": " << status.error_message()
-                << std::endl;
-      return "RPC failed";
-    }
+	if (status.ok()) {
+		return reply.data();
+	} else {
+		std::cout << status.error_code() << ": " << status.error_message()
+		          << std::endl;
+		return "RPC failed";
+	}
 }
 
-bool invalidWlanPacket(const PDU& pdu){
-	if(pdu.pdu_type() != PDU::PDUType::RADIOTAP)
+bool invalidWlanPacket(const PDU& pdu) {
+	if (pdu.pdu_type() != PDU::PDUType::RADIOTAP)
 		return true;
 	return false;
 }
 
-bool processPackets(const PDU& pdu){	
-	if(invalidWlanPacket(pdu))  
+bool processPackets(const PDU& pdu) {
+	if (invalidWlanPacket(pdu))
 		return true;
 
-	try{
+	try {
 		const RadioTap &frame = pdu.rfind_pdu<RadioTap>();
 		const Dot11Data &data_pdu = frame.rfind_pdu<Dot11Data>();
 		const SNAP &snap_pdu = data_pdu.rfind_pdu<SNAP>();
@@ -102,21 +102,21 @@ bool processPackets(const PDU& pdu){
 		const RawPDU::payload_type& payload = raw_pdu.payload();
 		string msg(payload.begin(), payload.end());
 
-		if(request.ParseFromString(msg)){
+		if (request.ParseFromString(msg)) {
 			cout << endl << "Receiver Message: " << msg << " size: " << msg.size() << endl;
 			transmittermanager.SaveMessage(request);
 		}
-	}catch(...){
-		cout << "."; //Error Decoding Data/Invalid Data 
+	} catch (...) {
+		cout << "."; //Error Decoding Data/Invalid Data
 		return true;
 	}
-	
+
 	return true;
 }
 
-bool RunReceiverServer(AppConfig &appConfig){
+bool RunReceiverServer(AppConfig &appConfig) {
 	transmittermanager.SetChannel(grpc::CreateChannel(
-    appConfig.coreGrpcServer, grpc::InsecureChannelCredentials()));
+	                                appConfig.coreGrpcServer, grpc::InsecureChannelCredentials()));
 
 	Sniffer sniffer(appConfig.interface, Sniffer::PROMISC);
 	sniffer.set_filter(appConfig.receiverFilter);

@@ -44,15 +44,15 @@ using transmitter::TransmitterReply;
 using transmitter::TransmitterManager;
 
 class TransmitterManagerClient {
- public:
-  TransmitterManagerClient();
-  TransmitterManagerClient(std::shared_ptr<Channel> channel);
+public:
+	TransmitterManagerClient();
+	TransmitterManagerClient(std::shared_ptr<Channel> channel);
 
-  void SetChannel(std::shared_ptr<Channel> channel);
-  std::string SaveMessage(const TransmitterRequest request);
+	void SetChannel(std::shared_ptr<Channel> channel);
+	std::string SaveMessage(const TransmitterRequest request);
 
- private:
-  std::unique_ptr<TransmitterManager::Stub> stub_;
+private:
+	std::unique_ptr<TransmitterManager::Stub> stub_;
 };
 
 bool invalidWlanPacket(const PDU& pdu);

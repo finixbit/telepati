@@ -42,34 +42,34 @@ using namespace std;
 
 class LightRedis
 {
-	private:
-		redisContext*	m_redis_conn;
-		string 				m_redis_host;
-		uint32_t 			m_redis_port;
-		bool 					m_redis_conn_is_valid;
+private:
+	redisContext*	m_redis_conn;
+	string 				m_redis_host;
+	uint32_t 			m_redis_port;
+	bool 					m_redis_conn_is_valid;
 
-	public:
-		LightRedis();
-		
-		LightRedis(string &redisHost, uint32_t &redisPort);
-		
-		~LightRedis(void);
+public:
+	LightRedis();
 
-		void init(string &redisHost, uint32_t &redisPort);
+	LightRedis(string &redisHost, uint32_t &redisPort);
 
-		bool redisConnIsInvalid();
+	~LightRedis(void);
 
-		bool connectToRedis();
-		
-		bool redisSet(string &redisKey, string &redisValue);
-		
-		string redisGet(string &redisKey);											
-		
-		bool redisHashSet(string &hashKey, string fieldKey, string fieldValue);
-		
-		string redisHashGet(string &hashKey, string fieldKey);  
+	void init(string &redisHost, uint32_t &redisPort);
 
-		map<string, string> redisHashGetAll(string &hashKey);  			
+	bool redisConnIsInvalid();
+
+	bool connectToRedis();
+
+	bool redisSet(string &redisKey, string &redisValue);
+
+	string redisGet(string &redisKey);
+
+	bool redisHashSet(string &hashKey, string fieldKey, string fieldValue);
+
+	string redisHashGet(string &hashKey, string fieldKey);
+
+	map<string, string> redisHashGetAll(string &hashKey);
 };
 
 #endif // API_REDIS_H

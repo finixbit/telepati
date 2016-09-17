@@ -37,10 +37,10 @@ class AppConfig
 {
 
 private:
-	bool 
+	bool
 	configIsValid;
 
-	bool 
+	bool
 	parseJsonConfig(const string &buffer);
 
 public:
@@ -51,7 +51,7 @@ public:
 	string 	 senderGrpcServer;
 	string 	 redisHost;
 	uint32_t redisPort;
-	
+
 	const string readFileContent(const string &filepath);
 
 	void loadJsonConfig(const string &filepath);
