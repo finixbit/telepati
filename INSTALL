@@ -3,7 +3,8 @@
 git clone https://github.com/intelburg/telepati.git --recursive
 
 # Dependencies
-apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill redis-server libboost-all-dev g++ cmake
+apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill redis-server libboost-all-dev g++ cmake pkg-config
+apt-get install libgrpc-dev protobuf-compiler libprotobuf-dev
 
 # Install nodejs (read link below for setup)
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server
