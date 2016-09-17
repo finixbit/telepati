@@ -17,7 +17,14 @@
       vm.showChatWindow = false;
       vm.loadUserChat = loadUserChat;
       vm.sendChatMessage = sendChatMessage;
+      vm.setProfile = setProfile;
+      vm.profilePing = profilePing;
 
+      /**
+      * @name getProfile
+      * @desc get profile
+      * @memberOf telepati.controllers.AppController
+      */
       function getProfile(){
         AppService.getProfile()
           .success(function(data){
@@ -27,6 +34,11 @@
           });
       }
 
+      /**
+      * @name getUserProfiles
+      * @desc get user list
+      * @memberOf telepati.controllers.AppController
+      */
       function getUserProfiles(){
         AppService.getUsers()
           .success(function(data){
@@ -34,6 +46,11 @@
           });
       }
 
+      /**
+      * @name getUserChats
+      * @desc get current user chats
+      * @memberOf telepati.controllers.AppController
+      */
       function getUserChats(){
         if((vm.user==undefined) || (vm.user.name.length < 1))
           return;
@@ -47,7 +64,7 @@
 
       /**
       * @name init
-      * @desc get profile / user list
+      * @desc startup script
       * @memberOf telepati.controllers.AppController
       */
       function init() {
@@ -83,8 +100,6 @@
           message: vm.newMessage,
           recipient: vm.user.name,
         }
-        console.log(msg);
-        return;
         AppService.getChatMessages(msg)
           .success(function(data){
             vm.chats = data.messagesList;
@@ -94,8 +109,51 @@
         vm.newMessage = "";
       }
 
+      /**
+      * @name setProfile
+      * @desc set profile name
+      * @memberOf telepati.controllers.AppController
+      */
+      function setProfile() {
+        if((vm.profile==undefined) || (vm.profile.length < 1))
+          return;
+
+        var msg = {
+          name: vm.profile,
+        }
+        AppService.setProfileName(msg)
+          .success(function(data){
+            if(data.response){
+              getProfile();
+              $('#myModal').modal('toggle');
+            } 
+          });
+      }
+
+      /**
+      * @name profilePing
+      * @desc send profile info to air
+      * @memberOf telepati.controllers.AppController
+      */
+      function profilePing() {
+        if((vm.profile==undefined) || (vm.profile.length < 1))
+          return;
+        
+        var msg = {
+          name: vm.profile,
+          public_key: "public_key",
+        }
+        AppService.profilePing(msg)
+          .success(function(data){
+            if(data.response){
+              console.log("Ping Successful ...");
+            } 
+          });
+      }
+
       // $interval(getUserProfiles, 2000);
       // $interval(getUserChats, 2000);
+      // $interval(profilePing, 2000);
 
     }
 })();

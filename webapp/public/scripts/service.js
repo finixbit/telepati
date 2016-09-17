@@ -20,6 +20,8 @@
       getUsers: getUsers,
       getProfile: getProfile,
       getChatMessages: getChatMessages,
+      setProfileName: setProfileName,
+      profilePing: profilePing,
     };
 
 
@@ -38,6 +40,16 @@
 
     function sendMessage(req_param){
       return $http.post('/api/messages', req_param,
+                {headers: {'Content-Type': 'application/json'}});
+    }
+
+    function setProfileName(req_param){
+      return $http.post('/api/profile', req_param,
+                {headers: {'Content-Type': 'application/json'}});
+    }
+
+    function profilePing(req_param){
+      return $http.post('/api/ping', req_param,
                 {headers: {'Content-Type': 'application/json'}});
     }
 

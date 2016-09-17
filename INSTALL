@@ -1,18 +1,18 @@
 
+#Get Source
+git clone https://github.com/intelburg/telepati.git --recursive
 
 # Dependencies
-apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill redis-server
+apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill redis-server libboost-all-dev g++ cmake
 
-
-# Install nodejs
-
+# Install nodejs (read link below for setup)
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server
 
 #Install libtins 
 $ cd third_party/libtins
 $ mkdir build && cd build
 $ cmake ../ -DLIBTINS_ENABLE_CXX11=1 -DCMAKE_INSTALL_PREFIX=/usr
 $ make
-
 
 #Install Grpc with Nodejs Plugin (read link below for setup)
 https://io2015codelabs.appspot.com/codelabs/gRPC#2
