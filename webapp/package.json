@@ -1,7 +1,7 @@
 {
-  "name": "Ahonya_app",
+  "name": "Telepati",
   "version": "1.0.0",
-  "description": "Ahonya Express web apps.",
+  "description": "Telepati web apps.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -14,8 +14,8 @@
     "express",
     "structure"
   ],
-  "author": "Ahonya.",
-  "license": "Ahonya",
+  "author": "Intelburg.",
+  "license": "Intelburg",
   "dependencies": {
     "async": "^2.0.1",
     "binary": "^0.3.0",

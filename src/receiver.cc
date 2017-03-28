@@ -123,4 +123,3 @@ bool RunReceiverServer(AppConfig &appConfig) {
 	sniffer.sniff_loop(processPackets);
 	return true;
 }
-

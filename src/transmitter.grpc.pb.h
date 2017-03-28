@@ -8,6 +8,7 @@
 
 #include <grpc++/impl/codegen/async_stream.h>
 #include <grpc++/impl/codegen/async_unary_call.h>
+#include <grpc++/impl/codegen/method_handler_impl.h>
 #include <grpc++/impl/codegen/proto_utils.h>
 #include <grpc++/impl/codegen/rpc_method.h>
 #include <grpc++/impl/codegen/service_type.h>
@@ -439,6 +440,167 @@ class TransmitterManager GRPC_FINAL {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_SendMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_SendMessage() {
+      ::grpc::Service::MarkMethodStreamedUnary(0,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::TransmitterRequest, ::transmitter::TransmitterReply>(std::bind(&WithStreamedUnaryMethod_SendMessage<BaseClass>::StreamedSendMessage, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_SendMessage() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SendMessage(::grpc::ServerContext* context, const ::transmitter::TransmitterRequest* request, ::transmitter::TransmitterReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSendMessage(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::TransmitterRequest,::transmitter::TransmitterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_SaveMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_SaveMessage() {
+      ::grpc::Service::MarkMethodStreamedUnary(1,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::TransmitterRequest, ::transmitter::TransmitterReply>(std::bind(&WithStreamedUnaryMethod_SaveMessage<BaseClass>::StreamedSaveMessage, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_SaveMessage() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SaveMessage(::grpc::ServerContext* context, const ::transmitter::TransmitterRequest* request, ::transmitter::TransmitterReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSaveMessage(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::TransmitterRequest,::transmitter::TransmitterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetUserProfile : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_GetUserProfile() {
+      ::grpc::Service::MarkMethodStreamedUnary(2,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::ProfileRequest, ::transmitter::TransmitterReply>(std::bind(&WithStreamedUnaryMethod_GetUserProfile<BaseClass>::StreamedGetUserProfile, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_GetUserProfile() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetUserProfile(::grpc::ServerContext* context, const ::transmitter::ProfileRequest* request, ::transmitter::TransmitterReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetUserProfile(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::ProfileRequest,::transmitter::TransmitterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_SetUserProfile : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_SetUserProfile() {
+      ::grpc::Service::MarkMethodStreamedUnary(3,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::ProfileRequest, ::transmitter::TransmitterReply>(std::bind(&WithStreamedUnaryMethod_SetUserProfile<BaseClass>::StreamedSetUserProfile, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_SetUserProfile() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SetUserProfile(::grpc::ServerContext* context, const ::transmitter::ProfileRequest* request, ::transmitter::TransmitterReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSetUserProfile(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::ProfileRequest,::transmitter::TransmitterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_UserProfilePing : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_UserProfilePing() {
+      ::grpc::Service::MarkMethodStreamedUnary(4,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::ProfileRequest, ::transmitter::TransmitterReply>(std::bind(&WithStreamedUnaryMethod_UserProfilePing<BaseClass>::StreamedUserProfilePing, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_UserProfilePing() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status UserProfilePing(::grpc::ServerContext* context, const ::transmitter::ProfileRequest* request, ::transmitter::TransmitterReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedUserProfilePing(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::ProfileRequest,::transmitter::TransmitterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetPingMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_GetPingMessages() {
+      ::grpc::Service::MarkMethodStreamedUnary(5,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::ProfileRequest, ::transmitter::ProfileUsersReply>(std::bind(&WithStreamedUnaryMethod_GetPingMessages<BaseClass>::StreamedGetPingMessages, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_GetPingMessages() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetPingMessages(::grpc::ServerContext* context, const ::transmitter::ProfileRequest* request, ::transmitter::ProfileUsersReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetPingMessages(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::ProfileRequest,::transmitter::ProfileUsersReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_SendDataMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_SendDataMessage() {
+      ::grpc::Service::MarkMethodStreamedUnary(6,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::TransmitterRequest, ::transmitter::TransmitterReply>(std::bind(&WithStreamedUnaryMethod_SendDataMessage<BaseClass>::StreamedSendDataMessage, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_SendDataMessage() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SendDataMessage(::grpc::ServerContext* context, const ::transmitter::TransmitterRequest* request, ::transmitter::TransmitterReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSendDataMessage(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::TransmitterRequest,::transmitter::TransmitterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_GetDataMessages : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_GetDataMessages() {
+      ::grpc::Service::MarkMethodStreamedUnary(7,
+        new ::grpc::StreamedUnaryHandler< ::transmitter::ProfileRequest, ::transmitter::UserDataMessagesReply>(std::bind(&WithStreamedUnaryMethod_GetDataMessages<BaseClass>::StreamedGetDataMessages, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_GetDataMessages() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status GetDataMessages(::grpc::ServerContext* context, const ::transmitter::ProfileRequest* request, ::transmitter::UserDataMessagesReply* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedGetDataMessages(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::transmitter::ProfileRequest,::transmitter::UserDataMessagesReply>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_SendMessage<WithStreamedUnaryMethod_SaveMessage<WithStreamedUnaryMethod_GetUserProfile<WithStreamedUnaryMethod_SetUserProfile<WithStreamedUnaryMethod_UserProfilePing<WithStreamedUnaryMethod_GetPingMessages<WithStreamedUnaryMethod_SendDataMessage<WithStreamedUnaryMethod_GetDataMessages<Service > > > > > > > > StreamedUnaryService;
 };
 
 }  // namespace transmitter

@@ -33,7 +33,7 @@ message ProfileRequest {
   string name             = 1;
   string publicKey        = 2;
   string privateKey       = 3;
-  string lastTimestamp    = 4; 
+  string lastTimestamp    = 4;
 }
 
 message ProfileUsersReply {

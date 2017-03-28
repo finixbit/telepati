@@ -19,17 +19,17 @@ g++ -std=c++11 -I/usr/local/include -pthread -c -o $APP_SRC_DIR/transmitter.grpc
 echo "[*]compiling sender ..."
 g++ -o $APP_SRC_DIR/sender.o -c $APP_SRC_DIR/sender.cc \
 	-O3 -std=gnu++11 -lpthread -ltins \
-	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread 
+	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread
 
 echo "[*]compiling receiver ..."
 g++ -o $APP_SRC_DIR/receiver.o -c $APP_SRC_DIR/receiver.cc \
 	-O3 -std=gnu++11 -lpthread -ltins \
-	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread 
+	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread
 
 echo "[*]compiling core ..."
 g++ -o $APP_SRC_DIR/core.o -c $APP_SRC_DIR/core.cc \
 	-O3 -std=gnu++11 -lpthread -lhiredis \
-	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread 
+	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread
 
 echo "[*]compiling main ..."
 g++ -o $APP_SRC_DIR/server $APP_SRC_DIR/main.cc \
@@ -37,5 +37,4 @@ g++ -o $APP_SRC_DIR/server $APP_SRC_DIR/main.cc \
 	$APP_SRC_DIR/transmitter.grpc.pb.o $APP_SRC_DIR/transmitter.pb.o \
 	$APP_SRC_DIR/sender.o $APP_SRC_DIR/receiver.o $APP_SRC_DIR/core.o \
 	-O3 -std=gnu++11 -lpthread -ljansson -ltins -lhiredis \
-	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread 
-
+	`pkg-config --libs grpc++ grpc` -lgrpc++_reflection -lprotobuf -lpthread

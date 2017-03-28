@@ -3,13 +3,36 @@
 git clone https://github.com/intelburg/telepati.git --recursive
 
 # Dependencies
-apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill redis-server libboost-all-dev g++ cmake pkg-config
-apt-get install libgrpc-dev protobuf-compiler libprotobuf-dev
+apt-get install libpcap-dev libhiredis-dev libjansson-dev ethtool rfkill \
+  redis-server libboost-all-dev g++ cmake pkg-config curl
 
-# Install nodejs (read link below for setup)
-https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server
+#Install GRPC and Protocl buffer
+$ git clone -b $(curl -L http://grpc.io/release) https://github.com/grpc/grpc
+$ cd grpc
+$ git submodule update --init
+$ cmake
+$ make
+$ [sudo] make install
 
-#Install libtins 
+$ apt-get install curl autoconf build-essential libtool
+$ git clone https://github.com/google/protobuf.git
+$ git checkout tags/v3.0.0-alpha-3.1
+$ cd protobuf
+$ ./autogen.sh
+$ ./configure --prefix=/usr
+$ make  all-recursive
+$ [sudo] make install
+
+#Install on debian (works)
+PREFIX=/usr make
+PREFIX=/usr make install
+
+
+# Install nodejs (ubuntu/debian)
+$ apt-get install nodejs npm
+$ sudo npm install bower
+
+#Install libtins
 $ cd third_party/libtins
 $ mkdir build && cd build
 $ cmake ../ -DLIBTINS_ENABLE_CXX11=1 -DCMAKE_INSTALL_PREFIX=/usr
